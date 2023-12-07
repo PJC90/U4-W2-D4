@@ -5,10 +5,8 @@ import Pierpaolo.entities.Order;
 import Pierpaolo.entities.Product;
 import com.github.javafaker.Faker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Application {
 
@@ -55,5 +53,15 @@ public class Application {
                 .map(product -> "Prodotto: " + product.getName() + ", Category:" + product.getCategory() + ", Prezzo: " + product.getPrice())
                 .toList()
         ));
+        System.out.println("********************    Map k=CLIENTE v=Lista ORDINI    *******************");
+        Map<Customer, List<Order>> orderByCustomer = orderList.stream().collect(Collectors.groupingBy(order -> order.getCustomer()));
+        orderByCustomer.forEach((customer, orders)->{
+            System.out.println("Cliente: " + customer.getName() + "  Ordini:");
+            orders.forEach(order -> {
+                System.out.println("Prodotti ordine " + order.getId());
+                order.getProducts().forEach(product -> System.out.println("Prodotto: " + product.getName() + ", Category:" + product.getCategory() + ", Prezzo: " + product.getPrice()));
+            });
+            System.out.println("TOTALE ORDINE: " );
+        });
     }
 }
