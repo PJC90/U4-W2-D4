@@ -76,6 +76,9 @@ public class Application {
         System.out.println(orderList);
         System.out.println();
         System.out.println("-----> 5                                      ******   Dato un elenco di prodotti, raggruppa i prodotti x categoria e calcola la somma    *******************");
-
+        Map<String, Double>  categoriaEtotale = magazzino.stream().collect(Collectors.groupingBy(product -> product.getCategory(),
+                Collectors.summingDouble(Product::getPrice)));
+//        System.out.println(categoriaEsomma);
+        categoriaEtotale.forEach((cat, somma)-> System.out.println("Categoria: " + cat + ", Totale: " + somma));
     }
 }
