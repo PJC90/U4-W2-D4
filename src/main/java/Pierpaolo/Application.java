@@ -101,6 +101,17 @@ public class Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println();
+        System.out.println("------>7                      leggere su disco il file e riempi un Arraylist con il contenuto del file   **********************************");
+        try {
+            List<Product> prodottiLetti = leggiProdottiDaDisco("listaProdotti.txt");
+            // Fai qualcosa con la lista di prodotti letti, ad esempio stampa a console
+            for (Product prodotto : prodottiLetti) {
+                System.out.println(prodotto.getName() + " - " + prodotto.getCategory() + " - " + prodotto.getPrice());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void salvaProdottiSuDisco(List<Product> prodotti, String nomeFile) throws IOException {
@@ -122,4 +133,30 @@ public class Application {
         // Utilizzo di FileUtils per scrivere la stringa su un file
         FileUtils.writeStringToFile(new File("src/" + nomeFile), storicizzazione.toString(), "UTF-8");
     }
+
+    // Metodo per leggere il contenuto del file e riempire un ArrayList di Product
+    public static List<Product> leggiProdottiDaDisco(String nomeFile) throws IOException {
+        // Leggere il contenuto del file utilizzando FileUtils
+        String storicizzazione = FileUtils.readFileToString(new File("src/" + nomeFile), "UTF-8");
+
+        // Creare un ArrayList di Product per immagazzinare i prodotti letti
+        List<Product> prodottiLetti = new ArrayList<>();
+
+        // Dividere la stringa in prodotti utilizzando il separatore "-----"
+        String[] prodottiArray = storicizzazione.split("-----");
+
+        // Iterare attraverso gli elementi e creare oggetti Product
+        for (String prodottoStringa : prodottiArray) {
+            String[] attributi = prodottoStringa.split("@");
+            if (attributi.length == 3) {
+                String nome = attributi[0];
+                String categoria = attributi[1];
+                double prezzo = Double.parseDouble(attributi[2]);
+                prodottiLetti.add(new Product(nome, categoria, prezzo));
+            }
+        }
+
+        return prodottiLetti;
+    }
+
 }
