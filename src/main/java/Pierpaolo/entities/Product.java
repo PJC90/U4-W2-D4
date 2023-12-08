@@ -16,6 +16,16 @@ public class Product {
         this.id = rm.nextLong(1,10000);
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

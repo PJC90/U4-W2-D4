@@ -31,6 +31,19 @@ public class Order {
         Random rm = new Random();
         this.id =  rm.nextLong(1,100000);
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", overDate=" + overDate +
+                ", deliveryDate=" + deliveryDate +
+                ", products=" + products +
+                ", customer=" + customer +
+                '}';
+    }
+
     public void addProduct(Product p){      //METODO che aggiunge un prodotto alla lista
         products.add(p);
     }

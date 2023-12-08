@@ -14,6 +14,15 @@ public class Customer {
         this.id = rm.nextLong(1,10000);
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tier=" + tier +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
